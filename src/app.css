@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #151515;
+  --bg-secondary: #12121a;
+  --bg-tertiary: #1a1a24;
+  --text-primary: #e4e4e7;
+  --text-secondary: #a1a1aa;
+  --text-muted: #a3a3b2;
+  --accent: #0fc58e;
+  --accent-dim: #c00f0fca;
+  --border: #27272a;
+}
+
+html {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+body {
+  font-family:
+    "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Monaco, monospace;
+  min-height: 100vh;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: white;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--text-primary);
+}
