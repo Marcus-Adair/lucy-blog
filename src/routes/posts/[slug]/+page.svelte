@@ -3,6 +3,7 @@
   import { gsap } from "gsap";
   import { ArrowLeft } from "lucide-svelte";
   import type { PageData } from "./$types";
+  import { resolve } from "$app/paths";
 
   let { data }: { data: PageData } = $props();
   const post = $derived(data.post);
@@ -22,7 +23,7 @@
       opacity: 0,
       y: 20,
       duration: 0.5,
-      ease: "power2.out"
+      ease: "power2.out",
     });
 
     // Paragraphs stagger in
@@ -34,7 +35,7 @@
         duration: 0.4,
         stagger: 0.08,
         ease: "power2.out",
-        delay: 0.3
+        delay: 0.3,
       });
     }
 
@@ -45,7 +46,7 @@
         y: 20,
         duration: 0.5,
         ease: "power2.out",
-        delay: 0.5
+        delay: 0.5,
       });
     }
   });
@@ -59,7 +60,7 @@
 <article bind:this={articleEl} class="space-y-8">
   <header class="space-y-4">
     <a
-      href="/posts"
+      href={resolve("/posts")}
       class="inline-flex items-center gap-2 text-sm text-(--text-muted) hover:text-(--accent) transition-colors"
     >
       <ArrowLeft size={16} />

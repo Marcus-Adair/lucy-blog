@@ -2,6 +2,7 @@
   import { gsap } from "gsap";
   import { ChevronRight } from "lucide-svelte";
   import type { Post } from "$lib/data/posts";
+  import { resolve } from "$app/paths";
 
   interface Props {
     post: Post;
@@ -16,7 +17,7 @@
     gsap.to(cardEl, {
       scale: 1.02,
       duration: 0.25,
-      ease: "power2.out"
+      ease: "power2.out",
     });
   }
 
@@ -24,14 +25,14 @@
     gsap.to(cardEl, {
       scale: 1,
       duration: 0.25,
-      ease: "power2.out"
+      ease: "power2.out",
     });
   }
 </script>
 
 <a
   bind:this={cardEl}
-  href="/posts/{post.slug}"
+  href={resolve("/posts/{post.slug}")}
   class="block p-5 rounded-lg border border-(--border) bg-(--bg-secondary) hover:bg-(--bg-tertiary) hover:border-(--accent-dim) transition-colors duration-200 group"
   onmouseenter={handleMouseEnter}
   onmouseleave={handleMouseLeave}

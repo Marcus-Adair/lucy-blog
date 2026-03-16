@@ -4,6 +4,7 @@
   import { ArrowRight } from "lucide-svelte";
   import { getLatestPosts } from "$lib/data/posts";
   import PostCard from "$lib/components/PostCard.svelte";
+  import { resolve } from "$app/paths";
 
   const latestPosts = getLatestPosts(3);
 
@@ -150,7 +151,7 @@
         Latest Reflections
       </h2>
       <a
-        href="/posts"
+        href={resolve("/posts")}
         class="inline-flex items-center gap-1 text-sm text-(--accent) hover:text-(--text-primary) transition-colors"
       >
         View all <ArrowRight size={14} />

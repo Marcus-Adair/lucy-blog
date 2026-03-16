@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { gsap } from "gsap";
   import { page } from "$app/state";
+  import { resolve } from "$app/paths";
 
   const links = [
     { href: "/", label: "Home" },
@@ -18,7 +19,7 @@
       duration: 0.6,
       repeat: -1,
       yoyo: true,
-      ease: "power2.inOut"
+      ease: "power2.inOut",
     });
   });
 </script>
@@ -26,7 +27,7 @@
 <nav class="w-full border-b border-(--border)">
   <div class="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
     <a
-      href="/"
+      href={resolve("/")}
       class="text-lg font-semibold tracking-tight text-(--text-primary) hover:text-(--accent) transition-colors"
     >
       <span bind:this={cursorEl} class="text-(--accent)">></span> LUCY
