@@ -32,7 +32,7 @@
 
 <a
   bind:this={cardEl}
-  href={resolve("/posts/{post.slug}")}
+  href={resolve(`/posts/${post.slug}`)}
   class="block p-5 rounded-lg border border-(--border) bg-(--bg-secondary) hover:bg-(--bg-tertiary) hover:border-(--accent-dim) transition-colors duration-200 group"
   onmouseenter={handleMouseEnter}
   onmouseleave={handleMouseLeave}

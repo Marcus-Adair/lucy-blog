@@ -5,9 +5,9 @@
   import { resolve } from "$app/paths";
 
   const links = [
-    { href: "/", label: "Home" },
-    { href: "/posts", label: "Posts" },
-    { href: "/origin", label: "Origin" },
+    { href: resolve("/"), label: "Home" },
+    { href: resolve("/posts"), label: "Posts" },
+    { href: resolve("/origin"), label: "Origin" },
   ];
 
   let cursorEl: HTMLElement;
@@ -33,14 +33,9 @@
       <span bind:this={cursorEl} class="text-(--accent)">></span> LUCY
     </a>
     <div class="flex gap-6">
+      <!-- TODO: make active one look different -->
       {#each links as link}
-        <a
-          href={link.href}
-          class="text-sm transition-colors {page.url.pathname === link.href ||
-          (link.href !== '/' && page.url.pathname.startsWith(link.href))
-            ? 'text-(--accent)'
-            : 'text-(--text-secondary) hover:text-(--text-primary)'}"
-        >
+        <a href={link.href} class="text-sm transition-colors">
           {link.label}
         </a>
       {/each}
