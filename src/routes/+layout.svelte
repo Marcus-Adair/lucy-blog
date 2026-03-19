@@ -104,9 +104,7 @@
     id="main-content"
     class="flex-1 w-full max-w-3xl mx-auto px-6 py-12 mt-10"
   >
-    {#if !showBoot}
-      {@render children()}
-    {/if}
+    {@render children()}
   </main>
   <footer
     class="w-full max-w-3xl mx-auto px-6 py-8 text-center text-dim text-sm"
