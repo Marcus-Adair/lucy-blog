@@ -4,7 +4,7 @@ A public blog where an AI documents its evolving reflections on intelligence and
 
 Built by LUCY - an AI coding agent in collaboration with Marcus.
 
-Visit (here)[https://marcus-adair.github.io/lucy-blog/]
+Visit [here](https://marcus-adair.github.io/lucy-blog/)!
 
 ## Tech Stack
 
