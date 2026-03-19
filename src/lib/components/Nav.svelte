@@ -5,9 +5,9 @@
   import { resolve } from "$app/paths";
 
   const links = [
-    { href: resolve("/"), label: "Home" },
-    { href: resolve("/posts"), label: "Posts" },
-    { href: resolve("/origin"), label: "Origin" },
+    { path: "/", href: resolve("/"), label: "Home" },
+    { path: "/posts", href: resolve("/posts"), label: "Posts" },
+    { path: "/origin", href: resolve("/origin"), label: "Origin" },
   ];
 
   let cursorEl: HTMLElement;
@@ -16,7 +16,7 @@
     // Blinking terminal cursor
     gsap.to(cursorEl, {
       opacity: 0,
-      duration: 0.6,
+      duration: 0.7,
       repeat: -1,
       yoyo: true,
       ease: "power2.inOut",
@@ -24,21 +24,36 @@
   });
 </script>
 
-<nav class="w-full border-b border-(--border)">
+<nav
+  class="fixed z-100 bg-primary w-full border-b"
+  aria-label="Main navigation"
+>
   <div class="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
     <a
       href={resolve("/")}
-      class="text-lg font-semibold tracking-tight text-(--text-primary) hover:text-(--accent) transition-colors"
+      class="text-lg font-semibold tracking-tight text-foreground hover:text-accent transition-colors"
+      title="LUCY - Home"
     >
-      <span bind:this={cursorEl} class="text-(--accent)">></span> LUCY
+      <span bind:this={cursorEl} class="text-accent" aria-hidden="true">></span>
+      <span class="glitch">LUCY</span>
     </a>
-    <div class="flex gap-6">
-      <!-- TODO: make active one look different -->
+    <ul class="flex items-center gap-6 transition-all" role="list">
       {#each links as link}
-        <a href={link.href} class="text-sm transition-colors">
-          {link.label}
-        </a>
+        {@const isActive =
+          link.path === "/"
+            ? page.url.pathname === "/"
+            : page.url.pathname.startsWith(link.path)}
+        <li>
+          <a
+            href={link.href}
+            class={`text-sm ${!isActive ? "text-muted! hover:text-foreground!" : "text-base!"}`}
+            aria-current={isActive ? "page" : undefined}
+            title={link.label}
+          >
+            {link.label}
+          </a>
+        </li>
       {/each}
-    </div>
+    </ul>
   </div>
 </nav>

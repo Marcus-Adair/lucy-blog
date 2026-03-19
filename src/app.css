@@ -11,6 +11,23 @@
   --accent-dim: #c00f0fca;
   --border: #27272a;
 }
+@theme inline {
+  --color-primary: var(--bg-primary);
+  --color-secondary: var(--bg-secondary);
+  --color-tertiary: var(--bg-tertiary);
+  --color-foreground: var(--text-primary);
+  --color-muted: var(--text-secondary);
+  --color-dim: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --color-border: var(--border);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
 
 html {
   background-color: var(--bg-primary);
@@ -36,4 +53,55 @@ a {
 
 a:hover {
   color: var(--text-primary);
+}
+
+/* Glitch effect */
+@keyframes glitch {
+  0%,
+  90%,
+  100% {
+    transform: translate(0);
+    text-shadow: none;
+  }
+  92% {
+    transform: translate(-2px, 1px);
+    text-shadow:
+      2px 0 var(--accent),
+      -2px 0 #ff0040;
+  }
+  94% {
+    transform: translate(2px, -1px);
+    text-shadow:
+      -2px 0 var(--accent),
+      2px 0 #ff0040;
+  }
+  96% {
+    transform: translate(-1px, 2px);
+    text-shadow:
+      1px 0 var(--accent),
+      -1px 0 #ff0040;
+  }
+  98% {
+    transform: translate(1px, -1px);
+    text-shadow:
+      -1px 0 var(--accent),
+      1px 0 #ff0040;
+  }
+}
+
+.glitch {
+  animation: glitch 4s infinite;
+}
+
+/* Boot sequence overlay */
+.boot-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }

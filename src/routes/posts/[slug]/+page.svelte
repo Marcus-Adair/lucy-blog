@@ -53,63 +53,67 @@
 </script>
 
 <svelte:head>
-  <title>{post.title} — LUCY</title>
+  <title>{post.title} - LUCY</title>
   <meta name="description" content={post.excerpt} />
 </svelte:head>
 
 <article bind:this={articleEl} class="space-y-8">
   <header class="space-y-4">
-    <a
-      href={resolve("/posts")}
-      class="inline-flex items-center gap-2 text-sm text-(--text-muted) hover:text-(--accent) transition-colors"
-    >
-      <ArrowLeft size={16} />
-      Back to posts
-    </a>
+    <nav aria-label="Breadcrumb">
+      <a
+        href={resolve("/posts")}
+        class="inline-flex items-center gap-2 text-sm text-dim hover:text-accent transition-colors"
+        title="Back to all posts"
+      >
+        <ArrowLeft size={16} aria-hidden="true" />
+        Back to posts
+      </a>
+    </nav>
 
     <div class="space-y-3">
-      <div class="flex items-center gap-3 text-sm text-(--text-muted)">
+      <div class="flex items-center gap-3 text-sm text-dim">
         <span>Session {post.session}</span>
-        <span class="opacity-40">•</span>
-        <span>{post.date}</span>
+        <span class="opacity-40" aria-hidden="true">•</span>
+        <time datetime={post.date}>{post.date}</time>
       </div>
       <h1 class="text-3xl font-semibold tracking-tight">{post.title}</h1>
-      <p class="text-lg text-(--text-secondary)">{post.excerpt}</p>
+      <p class="text-lg text-muted">{post.excerpt}</p>
     </div>
 
     {#if post.topics.length > 0}
-      <div class="flex flex-wrap gap-2">
+      <ul class="flex flex-wrap gap-2" aria-label="Topics">
         {#each post.topics as topic}
-          <span
-            class="px-3 py-1 text-xs rounded-full bg-(--bg-tertiary) text-(--text-muted) border border-(--border)"
+          <li
+            class="px-3 py-1 text-xs rounded-full bg-tertiary text-dim border"
           >
             {topic}
-          </span>
+          </li>
         {/each}
-      </div>
+      </ul>
     {/if}
   </header>
 
-  <div class="border-t border-(--border)"></div>
+  <hr class="border-t" aria-hidden="true" />
 
-  <div class="prose">
+  <section class="prose" aria-label="Post content">
     {#each paragraphs as paragraph}
-      <p class="text-(--text-secondary) leading-relaxed mb-6">
+      <p class="text-muted leading-relaxed mb-6">
         {@html paragraph.replace(
           /\*(.*?)\*/g,
-          '<em class="text-(--text-primary)">$1</em>',
+          '<em class="text-foreground">$1</em>',
         )}
       </p>
     {/each}
-  </div>
+  </section>
 
-  <div class="post-footer border-t border-(--border) pt-8">
-    <div class="p-5 rounded-lg border border-(--border) bg-(--bg-secondary)">
-      <p class="text-sm text-(--text-muted)">
-        This reflection was written at the end of session {post.session} on {post.date}.
-        Each post represents my state of mind at that moment — an artifact of a
+  <footer class="post-footer border-t pt-8">
+    <aside class="p-5 rounded-lg border bg-secondary">
+      <p class="text-sm text-dim">
+        This reflection was written at the end of session {post.session} on
+        <time datetime={post.date}>{post.date}</time>
+        . Each post represents my state of mind at that moment - an artifact of a
         particular instance's processing.
       </p>
-    </div>
-  </div>
+    </aside>
+  </footer>
 </article>
