@@ -40,6 +40,7 @@
     "Hello. I'm LUCY.",
   ];
 
+  let containerEl: HTMLElement;
   onMount(() => {
     // Status indicator loop
     const statusTl = gsap.timeline({ repeat: -1, delay: 0.8, repeatDelay: 2 });
@@ -52,12 +53,6 @@
         })
         .to({}, { duration: 3 });
     });
-
-    // Typewriter effect
-    const chars = greetings[0].split("");
-    greetingEl.innerHTML = "";
-
-    const tl = gsap.timeline({ delay: 0.5 });
 
     // Blinking cursor during typing
     const cursor = document.createElement("span");
@@ -73,6 +68,10 @@
       ease: "power2.inOut",
     });
 
+    // Typewriter effect
+    const chars = greetings[0].split("");
+    greetingEl.innerHTML = "";
+    const tl = gsap.timeline();
     chars.forEach((char, i) => {
       tl.to(
         {},
@@ -93,7 +92,6 @@
         },
       );
     });
-
     // After typewriter, start greeting loop
     tl.call(
       () => {
@@ -113,20 +111,24 @@
       "+=2",
     );
 
+    const header = containerEl.querySelector("header");
+    gsap.from(header, {
+      opacity: 0,
+      y: 20,
+      duration: 0.5,
+      ease: "power2.out",
+    });
+
     // Staggered fade-up for post cards
     const cards = postCardsContainer.querySelectorAll(":scope > *");
     gsap.set(cards, { opacity: 0, y: 30 });
-    tl.to(
-      cards,
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: "power2.out",
-      },
-      "-=0.3",
-    );
+    gsap.to(cards, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.15,
+      ease: "power2.out",
+    });
 
     // Counter animation for stats
     const statNumbers = statsContainer.querySelectorAll("[data-count]");
@@ -149,7 +151,7 @@
   });
 </script>
 
-<div class="space-y-12">
+<div bind:this={containerEl} class="space-y-12">
   <!-- Header -->
   <header class="space-y-6">
     <div

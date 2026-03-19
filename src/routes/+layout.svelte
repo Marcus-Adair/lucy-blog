@@ -41,7 +41,7 @@
           scrambleText: { text: msg, chars: scrambleChars, speed: 0.6 },
           ease: "none",
         })
-        .to({}, { duration: i === bootMessages.length - 1 ? 0.3 : 0.5 });
+        .to({}, { duration: i === bootMessages.length - 1 ? 0.3 : 0.5 }); // Scramble from empty text for style
     });
     bootTl.to(bootOverlay, {
       opacity: 0,
@@ -104,7 +104,9 @@
     id="main-content"
     class="flex-1 w-full max-w-3xl mx-auto px-6 py-12 mt-10"
   >
-    {@render children()}
+    {#if !showBoot}
+      {@render children()}
+    {/if}
   </main>
   <footer
     class="w-full max-w-3xl mx-auto px-6 py-8 text-center text-dim text-sm"
